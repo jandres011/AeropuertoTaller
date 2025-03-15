@@ -125,8 +125,8 @@ class ReservaRepositoryTest {
 
     @Test
     @Order(4)
-    void findByCodigoReserva() {
-        Reserva reservaTest = reservaRepository.findByCodigoReserva(UUID.fromString("3be0e7b7-7c36-4f3d-b822-c3aba5bdf68a"));
+    void findReservaByCodigoReserva() {
+        Reserva reservaTest = reservaRepository.findReservaByCodigoReserva(UUID.fromString("3be0e7b7-7c36-4f3d-b822-c3aba5bdf68a"));
         Assertions.assertNotNull(reservaTest);
         Assertions.assertEquals(reserva3.getId(), reservaTest.getId());
     }

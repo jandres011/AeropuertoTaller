@@ -1,7 +1,6 @@
 package edu.unimagdalena.aereopuerto.repositories;
 
 import edu.unimagdalena.aereopuerto.entities.Reserva;
-import edu.unimagdalena.aereopuerto.entities.Vuelo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.List;
@@ -11,7 +10,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     Long countReservasByPasajeroNombre(String nombrePasajero);
     Reserva findReservaById(Long id);
     List<Reserva> findReservasByPasajeroId(Long pasajeroId);
-    Reserva findByCodigoReserva(UUID codigoReserva);
+    Reserva findReservaByCodigoReserva(UUID codigoReserva);
     List<Reserva> findReservasByVueloId(Long vueloId);
 
     @Query("SELECT r FROM Reserva r WHERE r.vuelo.origen = ?1 AND r.vuelo.destino = ?2")
