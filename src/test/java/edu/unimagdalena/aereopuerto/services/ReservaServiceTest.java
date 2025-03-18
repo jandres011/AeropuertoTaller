@@ -17,7 +17,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ReservaServiceTest {
 
@@ -87,15 +87,17 @@ class ReservaServiceTest {
 
         assertNotNull(resultado);
         assertEquals(pasajero1.getReservas().size(), resultado);
+        verify(reservaRepository, times(1)).countReservasByPasajeroNombre(pasajero1.getNombre());
     }
 
-@Test
+    @Test
     void findReservaById() {
         when(reservaRepository.findReservaById(reserva1.getId())).thenReturn(reserva1);
         Reserva resultado = reservaService.findReservaById(reserva1.getId());
 
         assertNotNull(resultado);
         assertEquals(reserva1.getId(), resultado.getId());
+        verify(reservaRepository, times(1)).findReservaById(reserva1.getId());
     }
 
     @Test
@@ -106,6 +108,7 @@ class ReservaServiceTest {
         assertNotNull(resultado);
         assertEquals(reservasPasajero1.size(), resultado.size());
         assertTrue(resultado.containsAll(reservasPasajero1));
+        verify(reservaRepository, times(1)).findReservasByPasajeroId(pasajero1.getId());
     }
 
     @Test
@@ -115,6 +118,7 @@ class ReservaServiceTest {
 
         assertNotNull(resultado);
         assertEquals(reserva3.getCodigoReserva(), resultado.getCodigoReserva());
+        verify(reservaRepository, times(1)).findReservaByCodigoReserva(reserva3.getCodigoReserva());
     }
 
     @Test
@@ -124,6 +128,7 @@ class ReservaServiceTest {
 
         assertNotNull(resultado);
         assertEquals(1, resultado.size());
+        verify(reservaRepository, times(1)).findReservasByVueloId(vuelo1.getId());
     }
 
     @Test
@@ -134,6 +139,7 @@ class ReservaServiceTest {
         List<Reserva> resultado = reservaService.findReservasByOrigenAndDestino(vuelo1.getOrigen(), vuelo1.getDestino());
         assertNotNull(resultado);
         assertEquals(1, resultado.size());
+        verify(reservaRepository, times(1)).findReservasByOrigenAndDestino(vuelo1.getOrigen(), vuelo1.getDestino());
     }
 
     @Test
@@ -145,6 +151,7 @@ class ReservaServiceTest {
         assertNotNull(resultado);
         assertEquals(reservasVuelo1.size(), resultado.size());
         assertTrue(resultado.containsAll(reservasVuelo1));
+        verify(reservaRepository, times(1)).findReservasByCiudadOrigen(vuelo1.getOrigen());
 
     }
 
@@ -157,6 +164,7 @@ class ReservaServiceTest {
         assertNotNull(resultado);
         assertEquals(reservasVuelo1.size(), resultado.size());
         assertTrue(resultado.containsAll(reservasVuelo1));
+        verify(reservaRepository, times(1)).findReservationsByFlightDestination(vuelo1.getDestino());
     }
 
     @Test
@@ -168,6 +176,7 @@ class ReservaServiceTest {
         assertNotNull(resultado);
         assertEquals(reservasVuelo1.size(), resultado.size());
         assertTrue(resultado.containsAll(reservasVuelo1));
+        verify(reservaRepository, times(1)).findReservasByCodigoVuelo(vuelo1.getId());
     }
 
     @Test
@@ -176,8 +185,9 @@ class ReservaServiceTest {
         //No está implementado algo para saber que reservas son recientes, hay que arreglarlo.
         // De igual forma el test está bien jeje
         List<Reserva> resultado = reservaService.findRecentReservations();
+
         assertNotNull(resultado);
         assertEquals(reservasRecientes.size(), resultado.size());
-
+        verify(reservaRepository, times(1)).findRecentReservations();
     }
 }
