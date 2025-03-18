@@ -6,6 +6,7 @@ import edu.unimagdalena.aereopuerto.entities.Reserva;
 import edu.unimagdalena.aereopuerto.entities.Vuelo;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Import;
@@ -21,21 +22,12 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Import(TestcontainersConfiguration.class)
 @DataJpaTest
 @Testcontainers
-@Import(TestcontainersConfiguration.class)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ReservaRepositoryTest {
-    @Container
-    @ServiceConnection
-    static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:15")
-            .withDatabaseName("testPostgres")
-            .withUsername("testUsername")
-            .withPassword("testPassword");
-
-    static {
-        postgreSQLContainer.start();
-    }
 
     Pasajero pasajero1;
     Pasajero pasajero2;
@@ -104,7 +96,7 @@ class ReservaRepositoryTest {
     @Test
     @Order(1)
     void countReservasByPasajeroNombre() {
-        Long countTest = reservaRepository.countReservasByPasajeroNombre("Juan Antonio");
+        Long  countTest = reservaRepository.countReservasByPasajeroNombre("Juan Antonio");
         assertEquals(pasajero1.getReservas().size(), countTest);
     }
 
@@ -128,7 +120,7 @@ class ReservaRepositoryTest {
     void findReservaByCodigoReserva() {
         Reserva reservaTest = reservaRepository.findReservaByCodigoReserva(UUID.fromString("3be0e7b7-7c36-4f3d-b822-c3aba5bdf68a"));
         Assertions.assertNotNull(reservaTest);
-        Assertions.assertEquals(reserva3.getId(), reservaTest.getId());
+        Assertions.assertEquals(reserva3.getCodigoReserva(), reservaTest.getCodigoReserva());
     }
 
     @Test

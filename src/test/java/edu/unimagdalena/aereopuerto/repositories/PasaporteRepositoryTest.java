@@ -4,6 +4,7 @@ import edu.unimagdalena.aereopuerto.entities.Pasajero;
 import edu.unimagdalena.aereopuerto.entities.Pasaporte;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Import;
@@ -17,21 +18,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest
-@Testcontainers
 @Import(TestcontainersConfiguration.class)
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Testcontainers
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class PasaporteRepositoryTest {
-    @Container
-    @ServiceConnection
-    static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:15")
-            .withDatabaseName("testPostgres")
-            .withUsername("testUsername")
-            .withPassword("testPassword");
-
-    static {
-        postgreSQLContainer.start();
-    }
 
     Pasaporte pasaporte1;
     Pasaporte pasaporte2;

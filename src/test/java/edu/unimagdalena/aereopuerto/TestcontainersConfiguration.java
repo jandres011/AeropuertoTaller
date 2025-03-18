@@ -9,12 +9,14 @@ import org.testcontainers.utility.DockerImageName;
 
 @TestConfiguration(proxyBeanMethods = false)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class TestcontainersConfiguration {
-
+public class TestcontainersConfiguration {
 	@Bean
 	@ServiceConnection
-	PostgreSQLContainer<?> postgresContainer() {
-		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
+	public PostgreSQLContainer<?> postgresContainer() {
+		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:15"))
+				.withDatabaseName("testPostgres").
+				withUsername("testUsername").
+				withPassword("testPassword");
 	}
-
 }
+
