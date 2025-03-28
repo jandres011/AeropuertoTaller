@@ -52,7 +52,7 @@ class PasajeroRepositoryTest {
     @Autowired
     PasajeroRepository pasajeroRepository;
     @Autowired
-    ReservaRepository<R, Number> reservaRepository;
+    ReservaRepository reservaRepository;
     @Autowired
     VueloRepository vueloRepository;
     @Autowired

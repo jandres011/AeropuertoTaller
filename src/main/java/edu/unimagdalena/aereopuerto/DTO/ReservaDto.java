@@ -3,15 +3,15 @@ package edu.unimagdalena.aereopuerto.DTO;
 import java.util.UUID;
 
 public class ReservaDto {
-    private final UUID id;
+    private  UUID id;
     private final String pasajeroNombre;
     private final String vueloOrigen;
     private final String vueloDestino;
     private final UUID codigoReserva;
 
 
-    public ReservaDto(UUID id, String pasajeroNombre, String vueloOrigen, String vueloDestino, UUID codigoReserva){
-        this.id = id;
+    public ReservaDto(String pasajeroNombre, String vueloOrigen, String vueloDestino, UUID codigoReserva){
+
         this.pasajeroNombre = pasajeroNombre;
         this.vueloOrigen = vueloOrigen;
         this.vueloDestino = vueloDestino;
