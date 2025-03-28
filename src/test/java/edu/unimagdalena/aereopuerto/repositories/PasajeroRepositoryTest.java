@@ -18,8 +18,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @DataJpaTest
 @Testcontainers
 @Import(TestcontainersConfiguration.class)
@@ -54,7 +52,7 @@ class PasajeroRepositoryTest {
     @Autowired
     PasajeroRepository pasajeroRepository;
     @Autowired
-    ReservaRepository reservaRepository;
+    ReservaRepository<R, Number> reservaRepository;
     @Autowired
     VueloRepository vueloRepository;
     @Autowired

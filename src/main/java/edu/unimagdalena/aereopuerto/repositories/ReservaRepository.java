@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.UUID;
 
-public interface ReservaRepository extends JpaRepository<Reserva, Long> {
+public interface ReservaRepository<R, I extends Number> extends JpaRepository<Reserva, Long> {
     Long countReservasByPasajeroNombre(String nombrePasajero);
     Reserva findReservaById(Long id);
     List<Reserva> findReservasByPasajeroId(Long pasajeroId);

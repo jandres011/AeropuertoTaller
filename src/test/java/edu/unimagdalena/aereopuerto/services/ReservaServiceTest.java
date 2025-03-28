@@ -25,7 +25,7 @@ class ReservaServiceTest {
     private PasajeroRepository pasajeroRepository;
 
     @Mock
-    private ReservaRepository reservaRepository;
+    private ReservaRepository<R, Number> reservaRepository;
 
     @Mock
     private VueloRepository vueloRepository;
