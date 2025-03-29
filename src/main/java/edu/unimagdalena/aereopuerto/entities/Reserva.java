@@ -16,7 +16,7 @@ import java.util.UUID;
 public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     // Se cambia a UUID y se asigna un valor por defecto
     @Column(nullable = false, updatable = false) @Builder.Default

@@ -11,15 +11,11 @@ import java.util.UUID;
 
 public class VueloDto {
     private final int idVuelo;
-    private final String nombreVuelo;
-    private final UUID uuidVuelo;
     private final String origen;
     private final String destino;
 
-    public VueloDto(int idVuelo, String nombreVuelo, UUID uuidVuelo, String origen, String destino) {
+    public VueloDto(int idVuelo, String origen, String destino) {
         this.idVuelo = idVuelo;
-        this.nombreVuelo = nombreVuelo;
-        this.uuidVuelo = uuidVuelo;
         this.origen = origen;
         this.destino = destino;
     }

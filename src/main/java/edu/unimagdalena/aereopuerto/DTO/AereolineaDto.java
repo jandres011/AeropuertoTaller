@@ -7,26 +7,21 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 
-@Builder
 @Getter
 public class AereolineaDto {
 
 
-
+    private Long idAereolinea;
     private final String nombreAereolinea;
-    private final ArrayList<Vuelo> Vuelo;
+    private final String vueloOrigen;
+    private final String vueloDestino;
 
-    public AereolineaDto( String nombreAereolinea, ArrayList<Vuelo> vuelo) {
+    public AereolineaDto(String nombreAereolinea, String vueloOrigen, String vueloDestino) {
 
         this.nombreAereolinea = nombreAereolinea;
-        Vuelo = vuelo;
+        this.vueloOrigen = vueloOrigen;
+        this.vueloDestino = vueloDestino;
     }
 
-    public String getNombreAereolinea() {
-        return nombreAereolinea;
-    }
 
-    public ArrayList<Vuelo> getVuelo(){
-        return Vuelo;
-    }
 }
