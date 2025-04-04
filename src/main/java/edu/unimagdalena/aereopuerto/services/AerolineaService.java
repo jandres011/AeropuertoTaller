@@ -22,6 +22,8 @@ public class AerolineaService {
     }
 
     public Aereolinea findAereolineaByIdAereolinea(Long idAereolinea) {
+
+
         return aereolineaRepository.findAereolineaByIdAereolinea(idAereolinea);
     }
 

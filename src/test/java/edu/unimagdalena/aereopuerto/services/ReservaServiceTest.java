@@ -1,5 +1,6 @@
 package edu.unimagdalena.aereopuerto.services;
 
+import edu.unimagdalena.aereopuerto.DTO.ReservaDto;
 import edu.unimagdalena.aereopuerto.entities.Pasajero;
 import edu.unimagdalena.aereopuerto.entities.Pasaporte;
 import edu.unimagdalena.aereopuerto.entities.Reserva;
@@ -92,18 +93,18 @@ class ReservaServiceTest {
 
     @Test
     void findReservaById() {
-        when(reservaRepository.findReservaById(reserva1.getId())).thenReturn(reserva1);
-        Reserva resultado = reservaService.findReservaById(reserva1.getId());
+        when(reservaRepository.findReservaById(reserva1.getId())).thenReturn(Optional.of(reserva1));
+        Optional<ReservaDto> resultado = reservaService.findReservaById(reserva1.getId());
 
         assertNotNull(resultado);
-        assertEquals(reserva1.getId(), resultado.getId());
+        assertEquals(reserva1.getId(), resultado.get().getId());
         verify(reservaRepository, times(1)).findReservaById(reserva1.getId());
     }
 
     @Test
     void findReservasByPasajeroId() {
         when(reservaRepository.findReservasByPasajeroId(pasajero1.getId())).thenReturn(new ArrayList<>(reservasPasajero1));
-        List<Reserva> resultado = reservaService.findReservasByPasajeroId(pasajero1.getId());
+        List<ReservaDto> resultado = reservaService.findReservasByPasajeroId(pasajero1.getId());
 
         assertNotNull(resultado);
         assertEquals(reservasPasajero1.size(), resultado.size());
@@ -114,10 +115,10 @@ class ReservaServiceTest {
     @Test
     void findReservaByCodigoReserva() {
         when(reservaRepository.findReservaByCodigoReserva(reserva3.getCodigoReserva())).thenReturn(reserva3);
-        Reserva resultado = reservaService.findReservaByCodigoReserva(reserva3.getCodigoReserva());
+        Optional<ReservaDto> resultado = reservaService.findReservaByCodigoReserva(reserva3.getCodigoReserva());
 
         assertNotNull(resultado);
-        assertEquals(reserva3.getCodigoReserva(), resultado.getCodigoReserva());
+        assertEquals(reserva3.getCodigoReserva(), resultado.get().getCodigoReserva());
         verify(reservaRepository, times(1)).findReservaByCodigoReserva(reserva3.getCodigoReserva());
     }
 

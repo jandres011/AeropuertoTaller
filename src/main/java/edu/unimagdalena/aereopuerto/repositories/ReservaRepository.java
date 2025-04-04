@@ -4,11 +4,12 @@ import edu.unimagdalena.aereopuerto.entities.Reserva;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface ReservaRepository<R, I extends Number> extends JpaRepository<Reserva, Long> {
     Long countReservasByPasajeroNombre(String nombrePasajero);
-    Reserva findReservaById(Long id);
+    Optional<Reserva> findReservaById(Long id);
     List<Reserva> findReservasByPasajeroId(Long pasajeroId);
     Reserva findReservaByCodigoReserva(UUID codigoReserva);
     List<Reserva> findReservasByVueloId(Long vueloId);

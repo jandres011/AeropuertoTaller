@@ -9,7 +9,9 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ReservarMapper {
 
-    @Mapping(source = "pasajero.nombre", target = "NombrePasajero")
+
+
+    @Mapping(source = "pasajero.nombre", target = "pasajeroNombre")
     @Mapping(source = "vuelo.origen", target = "vueloOrigen")
     @Mapping(source = "vuelo.destino", target = "vueloDestino")
     ReservaDto toDto(Reserva reserva);

@@ -12,10 +12,7 @@ import org.springframework.context.annotation.Import;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.TestcontainersConfiguration;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -100,9 +97,9 @@ class ReservaRepositoryTest {
     @Test
     @Order(2)
     void findReservaById() {
-        Reserva reservaTest = reservaRepository.findReservaById(reserva2.getId());
+        Optional<Reserva> reservaTest = reservaRepository.findReservaById(reserva2.getId());
         Assertions.assertNotNull(reservaTest);
-        Assertions.assertEquals(reserva2.getId(), reservaTest.getId());
+        Assertions.assertEquals(reserva2.getId(), reservaTest.get().getId());
     }
 
     @Test
