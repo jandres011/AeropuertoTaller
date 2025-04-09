@@ -4,6 +4,7 @@ package edu.unimagdalena.aereopuerto.services;
 import edu.unimagdalena.aereopuerto.DTO.ReservaDto;
 import edu.unimagdalena.aereopuerto.DTO.mapper.ReservarMapper;
 import edu.unimagdalena.aereopuerto.entities.Reserva;
+import edu.unimagdalena.aereopuerto.exepciones.ReservarNotFoundExeption;
 import edu.unimagdalena.aereopuerto.repositories.ReservaRepository;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,8 @@ public class ReservaService implements ReservaServiceInterface {
         Optional<Reserva> reserva = reservaRepository.findReservaById(id);
 
         Optional<ReservaDto> reservaDto;
-        reservaDto = reserva.map(reservarMapper::toDto);
+        reservaDto = Optional.ofNullable(reserva.map(reservarMapper::toDto).
+                orElseThrow(() -> new ReservarNotFoundExeption("No se encontro la reserva chaval")));
 
         return reservaDto;
     }
